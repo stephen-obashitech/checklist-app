@@ -14,3 +14,25 @@ function isFinished () { // eslint-disable-line no-unused-vars
     document.getElementById('checklistFinished').innerHTML = 'Finish your checklist!'
   }
 }
+
+function addItem () { // eslint-disable-line no-unused-vars
+  var input = document.getElementById('inputChecklistItem')
+
+  var checklistDiv = document.createElement('div')
+  var checklistDivInput = document.createElement('input')
+  checklistDivInput.setAttribute('type', 'checkbox')
+  checklistDiv.appendChild(checklistDivInput)
+
+  var checklistLabel = document.createElement('label')
+  var checklistLabelText = document.createTextNode(input.value)
+  checklistLabel.appendChild(checklistLabelText)
+
+  checklistDiv.appendChild(checklistLabel)
+
+  finishButton = document.getElementById('finishButton')
+  console.log(finishButton)
+
+  parentNode = document.getElementById('listChecklistForm')
+  console.log(parentNode)
+  parentNode.insertBefore(checklistDiv, finishButton)
+}
