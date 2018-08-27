@@ -12,26 +12,34 @@
   <div class="container">
     <h1>Checklist App</h1>
 
-    <div class="alert alert-warning">
-      <p class="mb-0">This is a beta!</p>
+    <div class="row">
+      <div class="col-md" id="displayChecklist">
+        <div class="alert alert-warning">
+          <p class="mb-0">This is a beta!</p>
+        </div>
+
+        <form onsubmit="return false">
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="checkbox1"> <label class="form-check-label" for="checkbox1">Do Dishes</label>
+          </div>
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="checkbox2"> <label class="form-check-label" for="checkbox2">Sweep Floors</label>
+          </div>
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="checkbox3"> <label class="form-check-label" for="checkbox3">Make Bed</label>
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="isFinished()">Finished!</button>
+        </form>
+
+        <p id="checklistFinished">Finish your checklist!</p>
+      </div>
+
+      <div class="col-md" id="addChecklist">
+        <p>This is where add should be!</p>
+      </div>
     </div>
-
-    <form onsubmit="return false">
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox1"> <label class="form-check-label" for="checkbox1">Do Dishes</label>
-      </div>
-
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox2"> <label class="form-check-label" for="checkbox2">Sweep Floors</label>
-      </div>
-
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="checkbox3"> <label class="form-check-label" for="checkbox3">Make Bed</label>
-      </div>
-      <button type="submit" class="btn btn-primary" onclick="isFinished()">Finished!</button>
-    </form>
-
-    <p id="checklistFinished">Finish your checklist!</p>
   </div>
   <!-- Bootstrap stuff -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
