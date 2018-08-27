@@ -10,14 +10,14 @@
 </head>
 <body>
   <div class="container">
-    <h1>Checklist App</h1>
+    <h1 class="text-center">Checklist App</h1>
+
+    <div class="alert alert-warning text-center">
+      <p class="mb-0">This is a beta!</p>
+    </div>
 
     <div class="row">
-      <div class="col-md" id="displayChecklist">
-        <div class="alert alert-warning">
-          <p class="mb-0">This is a beta!</p>
-        </div>
-
+      <div id="displayChecklist" class="col-md">
         <form onsubmit="return false" id="listChecklistForm" name="listChecklistForm">
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input"> <label class="form-check-label" for="checkbox1">Do Dishes</label>
@@ -36,7 +36,7 @@
         <p id="checklistFinished">Finish your checklist!</p>
       </div>
 
-      <div class="col-md" id="addChecklist">
+      <div id="addChecklist" class="col-md">
         <form onsubmit="return false">
           <div class="form-group">
             <label for="inputChecklistItem">Add to checklist</label> <input type="text" class="form-control" id="inputChecklistItem">
