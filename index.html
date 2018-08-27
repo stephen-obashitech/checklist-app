@@ -37,7 +37,13 @@
       </div>
 
       <div class="col-md" id="addChecklist">
-        <p>This is where add should be!</p>
+        <form onsubmit="return false">
+          <div class="form-group">
+            <label for="inputChecklistItem">Add to checklist</label>
+            <input type="text" class="form-control" id="inputChecklistItem">
+          </div>
+          <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
       </div>
     </div>
   </div>
