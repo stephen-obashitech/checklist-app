@@ -35,10 +35,10 @@ function addItem () { // eslint-disable-line no-unused-vars
 
   checklistDiv.appendChild(checklistLabel)
 
-  finishButton = document.getElementById('finishButton')
+  var finishButton = document.getElementById('finishButton')
   console.log(finishButton)
 
-  parentNode = document.getElementById('listChecklistForm')
+  var parentNode = document.getElementById('listChecklistForm')
   console.log(parentNode)
   parentNode.insertBefore(checklistDiv, finishButton)
 }
