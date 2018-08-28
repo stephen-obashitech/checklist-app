@@ -1,3 +1,12 @@
+// setup event listeners
+var finishButton = document.getElementById('finishButton')
+finishButton.addEventListener('click', isFinished)
+
+var addButton = document.getElementById('addButton')
+addButton.addEventListener('click', addItem)
+
+console.log('EVENT LISTENERS SETUP')
+
 function isFinished () { // eslint-disable-line no-unused-vars
   var checkboxes = document.getElementsByClassName('form-check-input')
   var allFinished = true
