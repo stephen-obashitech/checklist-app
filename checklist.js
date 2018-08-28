@@ -7,7 +7,7 @@ addButton.addEventListener('click', addItem)
 
 console.log('EVENT LISTENERS SETUP')
 
-function isFinished () { // eslint-disable-line no-unused-vars
+function isFinished () {
   var checkboxes = document.getElementsByClassName('form-check-input')
   var allFinished = true
   for (var i = 0; i < checkboxes.length; i++) {
@@ -24,7 +24,7 @@ function isFinished () { // eslint-disable-line no-unused-vars
   }
 }
 
-function addItem () { // eslint-disable-line no-unused-vars
+function addItem () {
   var userInput = document.getElementById('inputChecklistItem')
 
   var checklistDiv = document.createElement('div')
