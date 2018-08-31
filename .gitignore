@@ -5,3 +5,6 @@ node_modules/*
 */.idea/
 
 server/server
+
+.DS_Store
+*/.DS_Store
