@@ -4,7 +4,9 @@ node_modules/*
 .idea/
 */.idea/
 
-server/server
+server/checklist-app
 
 .DS_Store
 */.DS_Store
+
+src/*

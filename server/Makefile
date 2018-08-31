@@ -1,7 +1,7 @@
 all:
 	make verify
-	go build -o server main.go
+	go build ./...
 
 verify:
-	go vet
-	go fmt
+	go vet ./...
+	go fmt ./...

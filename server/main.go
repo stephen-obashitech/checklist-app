@@ -2,24 +2,32 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
-func HandleFinished(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
-	fmt.Println("DESPAFINITO")
+type Checkboxes struct {
+	Boxes []bool `json:"checkboxes"`
+}
 
-	w.Write([]byte("<a>hello</a>"))
+func HandleFinished(c *gin.Context) {
+	var boxes Checkboxes
+	err := c.BindJSON(&boxes)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(boxes)
+
+	c.JSON(200, true)
 }
 
 func main() {
-	http.HandleFunc("/finished", HandleFinished)
+	r := gin.Default()
+	r.Use(cors.Default())
+	r.POST("/finished", HandleFinished)
 
 	fmt.Println("***Server Started!***")
-	log.Fatal(http.ListenAndServe("127.0.0.1:7890", nil))
-}
 
-func enableCors(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	r.Run("127.0.0.1:7890")
 }
