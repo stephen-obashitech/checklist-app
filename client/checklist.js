@@ -29,10 +29,10 @@ function isFinished () {
   request.setRequestHeader('Content-Type', 'application/json')
 
   // create the json object
-  jsonCheckboxesFinal = {
+  var jsonCheckboxesFinal = {
     checkboxes: jsonCheckboxes
   }
-  finalJSON = JSON.stringify(jsonCheckboxesFinal)
+  var finalJSON = JSON.stringify(jsonCheckboxesFinal)
   console.log(finalJSON)
   request.send(finalJSON)
   console.log('REQUEST SENT')
