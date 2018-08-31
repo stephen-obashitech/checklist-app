@@ -10,16 +10,28 @@ type Checkboxes struct {
 	Boxes []bool `json:"checkboxes"`
 }
 
+type FinishedResponse struct {
+	Finished bool
+}
+
 func HandleFinished(c *gin.Context) {
 	var boxes Checkboxes
+
 	err := c.BindJSON(&boxes)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(boxes)
+	allFinished := true
+	for _, box := range boxes.Boxes {
+		if !box {
+			allFinished = false
+			break
+		}
+	}
+	response := &FinishedResponse{Finished: allFinished}
 
-	c.JSON(200, true)
+	c.JSON(200, response)
 }
 
 func main() {
