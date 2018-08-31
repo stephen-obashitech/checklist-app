@@ -22,14 +22,19 @@ function isFinished () {
     if (request.readyState === 4 && request.status === 200) {
       // DO SOMETHING WITH THE RESPONSE
       console.log('REQUEST RECEIVED')
-    } else if (request.readyState === 4) {
-      console.log('WTF happened to my requset...')
-      console.log(request)
     }
   }
 
   request.open('POST', 'http://127.0.0.1:7890/finished', true)
-  request.send(null)
+  request.setRequestHeader('Content-Type', 'application/json')
+
+  // create the json object
+  jsonCheckboxesFinal = {
+    checkboxes: jsonCheckboxes
+  }
+  finalJSON = JSON.stringify(jsonCheckboxesFinal)
+  console.log(finalJSON)
+  request.send(finalJSON)
   console.log('REQUEST SENT')
 
   console.log(jsonCheckboxes)
