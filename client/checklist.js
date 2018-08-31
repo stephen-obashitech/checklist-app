@@ -17,41 +17,33 @@ function isFinished () {
     jsonCheckboxes.push(checkboxes[i].checked)
   }
 
+  // create the json object
+  var jsonCheckboxesFinal = {
+    checkboxes: jsonCheckboxes
+  }
+  var finalJSON = JSON.stringify(jsonCheckboxesFinal)
+
   var request = new XMLHttpRequest()
-  var checklistFinished = false
   request.onreadystatechange = function () {
     if (request.readyState === 4 && request.status === 200) {
-
       var json = request.responseText
       console.log(json)
 
       var obj = JSON.parse(json)
       console.log(obj)
 
-      checklistFinished = obj.Finished
-      
-  if (checklistFinished) {
-    document.getElementById("checklistFinished").textContent = "Congrats!"
-  } else {
-    document.getElementById("checklistFinished").textContent = "MORE WORK"
-  }
+      if (obj.Finished) {
+        document.getElementById('checklistFinished').textContent = 'Congrats!'
+      } else {
+        document.getElementById('checklistFinished').textContent = 'MORE WORK'
+      }
     }
   }
 
   request.open('POST', 'http://127.0.0.1:7890/finished', true)
   request.setRequestHeader('Content-Type', 'application/json')
 
-  // create the json object
-  var jsonCheckboxesFinal = {
-    checkboxes: jsonCheckboxes
-  }
-  var finalJSON = JSON.stringify(jsonCheckboxesFinal)
-  console.log(finalJSON)
   request.send(finalJSON)
-  console.log('REQUEST SENT')
-
-  console.log(jsonCheckboxes)
-
 }
 
 function addItem () {
