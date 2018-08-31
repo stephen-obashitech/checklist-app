@@ -18,10 +18,23 @@ function isFinished () {
   }
 
   var request = new XMLHttpRequest()
+  var checklistFinished = false
   request.onreadystatechange = function () {
     if (request.readyState === 4 && request.status === 200) {
-      // DO SOMETHING WITH THE RESPONSE
-      console.log('REQUEST RECEIVED')
+
+      var json = request.responseText
+      console.log(json)
+
+      var obj = JSON.parse(json)
+      console.log(obj)
+
+      checklistFinished = obj.Finished
+      
+  if (checklistFinished) {
+    document.getElementById("checklistFinished").textContent = "Congrats!"
+  } else {
+    document.getElementById("checklistFinished").textContent = "MORE WORK"
+  }
     }
   }
 
@@ -38,6 +51,7 @@ function isFinished () {
   console.log('REQUEST SENT')
 
   console.log(jsonCheckboxes)
+
 }
 
 function addItem () {
