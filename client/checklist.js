@@ -5,24 +5,34 @@ finishButton.addEventListener('click', isFinished)
 var addButton = document.getElementById('addButton')
 addButton.addEventListener('click', addItem)
 
+// isFinished will check to see if a checklist has been completed.
+// It gathers data into json, then sends a request to the backend to
+// ensure it actually has completed. This is excessive, but is primarily
+// for learning purposes
 function isFinished () {
   var checkboxes = document.getElementsByClassName('form-check-input')
 
-  // Identify if all checkboxes have been ticked
-  var allFinished = true
+  var jsonCheckboxes = []
   for (var i = 0; i < checkboxes.length; i++) {
-    if (!checkboxes[i].checked) {
-      allFinished = false
-      break
+    jsonCheckboxes.push(checkboxes[i].checked)
+  }
+
+  var request = new XMLHttpRequest()
+  request.onreadystatechange = function () {
+    if (request.readyState === 4 && request.status === 200) {
+      // DO SOMETHING WITH THE RESPONSE
+      console.log('REQUEST RECEIVED')
+    } else if (request.readyState === 4) {
+      console.log('WTF happened to my requset...')
+      console.log(request)
     }
   }
 
-  // Report whether the user has completed their checklist
-  if (allFinished) {
-    document.getElementById('checklistFinished').innerHTML = 'Congratulations!'
-  } else {
-    document.getElementById('checklistFinished').innerHTML = 'Finish your checklist!'
-  }
+  request.open('POST', 'http://127.0.0.1:7890/finished', true)
+  request.send(null)
+  console.log('REQUEST SENT')
+
+  console.log(jsonCheckboxes)
 }
 
 function addItem () {
