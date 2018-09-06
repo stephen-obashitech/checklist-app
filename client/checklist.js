@@ -26,17 +26,7 @@ function isFinished () {
   var request = new XMLHttpRequest()
   request.onreadystatechange = function () {
     if (request.readyState === 4 && request.status === 200) {
-      var json = request.responseText
-      console.log(json)
-
-      var obj = JSON.parse(json)
-      console.log(obj)
-
-      if (obj.Finished) {
-        document.getElementById('checklistFinished').textContent = 'Congrats!'
-      } else {
-        document.getElementById('checklistFinished').textContent = 'MORE WORK'
-      }
+      isFinishedResponse(request)
     }
   }
 
@@ -44,6 +34,23 @@ function isFinished () {
   request.setRequestHeader('Content-Type', 'application/json')
 
   request.send(finalJSON)
+}
+
+// isFinishedResponse will read the response from the server
+// and identify if the checklist is 'finished', along with
+// making the user aware
+function isFinishedResponse (request) {
+  var json = request.responseText
+  console.log(json)
+
+  var obj = JSON.parse(json)
+  console.log(obj)
+
+  if (obj.Finished) {
+    document.getElementById('checklistFinished').textContent = 'Congrats!'
+  } else {
+    document.getElementById('checklistFinished').textContent = 'MORE WORK'
+  }
 }
 
 function addItem () {
