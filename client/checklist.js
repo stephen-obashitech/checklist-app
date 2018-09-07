@@ -53,6 +53,8 @@ function isFinishedResponse (request) {
   }
 }
 
+// TODO comment this function
+// TODO rewrite this function
 function addItem () {
   var userInput = document.getElementById('inputChecklistItem').value
 
