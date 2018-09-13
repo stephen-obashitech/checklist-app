@@ -5,6 +5,7 @@ node_modules/*
 */.idea/
 
 server/checklist-app
+server/checklist.json
 
 .DS_Store
 */.DS_Store
