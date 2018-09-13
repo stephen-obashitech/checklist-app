@@ -76,3 +76,33 @@ func TestHandleSave(t *testing.T) {
 		t.Error("Saved Checklist isn't the same as request cehcklist")
 	}
 }
+
+func TestHandleLoad(t *testing.T) {
+	SaveFileLocation = "testdata/load-checklist.json"
+
+	response := httptest.NewRecorder()
+	c, _ := gin.CreateTestContext(response)
+
+	c.Request = httptest.NewRequest("POST", "/load", bytes.NewReader([]byte("")))
+
+	HandleLoad(c)
+
+	// Load response into checklist struct?
+	jsonResponse := &Checklist{}
+	err := json.Unmarshal(response.Body.Bytes(), jsonResponse)
+	if err != nil {
+		t.Error(err)
+	}
+
+	// Ensure it meets our standards
+	expectedChecklist := &Checklist{Items: []ChecklistItem{
+		{Finished: true, Label: "tidy desk"},
+		{Finished: true, Label: "polish desk"},
+		{Finished: false, Label: "repaint desk"},
+	}}
+
+	if !Equals(*expectedChecklist, *jsonResponse) {
+		t.Error("Expected Checklist:", expectedChecklist)
+		t.Error("Actual Checklist:", jsonResponse)
+	}
+}
