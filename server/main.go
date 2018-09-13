@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -75,6 +76,18 @@ func HandleSave(c *gin.Context) {
 	}
 
 	saveToFile(string(body))
+}
+
+func HandleLoad(c *gin.Context) {
+	fileBody, err := ioutil.ReadFile(SaveFileLocation)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	checklist := &Checklist{}
+	json.Unmarshal(fileBody, checklist)
+
+	c.JSON(200, checklist)
 }
 
 // *********************

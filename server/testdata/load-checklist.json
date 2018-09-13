@@ -1,0 +1,5 @@
+{"items": [
+  {"finished": true, "label": "tidy desk"},
+  {"finished": true, "label": "polish desk"},
+  {"finished": false, "label": "repaint desk"}
+]}
