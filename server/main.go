@@ -76,6 +76,7 @@ func HandleSave(c *gin.Context) {
 	}
 
 	saveToFile(string(body))
+	c.Status(204)
 }
 
 func HandleLoad(c *gin.Context) {

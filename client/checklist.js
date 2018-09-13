@@ -5,6 +5,12 @@ finishButton.addEventListener('click', isFinished)
 var addButton = document.getElementById('addButton')
 addButton.addEventListener('click', addItem)
 
+var saveButton = document.getElementById('saveButton')
+saveButton.addEventListener('click', saveChecklist)
+
+var loadButton = document.getElementById('loadButton')
+loadButton.addEventListener('click', loadChecklist)
+
 // isFinished will check to see if a checklist has been completed.
 // It gathers data into json, then sends a request to the backend to
 // ensure it actually has completed. This is excessive, but is primarily
@@ -79,4 +85,34 @@ function addItem () {
   var finishButton = document.getElementById('finishButton')
   var parentNode = document.getElementById('listChecklistForm')
   parentNode.insertBefore(checklistDiv, finishButton)
+}
+
+function saveChecklist () {
+  // Create a javascript object containing the current state of the checklist
+  var checklist = {}
+  checklist.items = []
+
+  // Extract all of the checklist items on our webpage
+  var checklistItems = document.getElementsByClassName('form-check')
+
+  // Add each checklist item into our checklist object
+  for (var i = 0; i < checklistItems.length; i++) {
+    var item = {}
+    item.finished = checklistItems[i].getElementsByClassName('form-check-input')[0].checked
+    item.label = checklistItems[i].getElementsByClassName('form-check-label')[0].textContent
+
+    checklist.items.push(item)
+  }
+
+  // Send a 'save' request to the server
+  var request = new XMLHttpRequest()
+
+  request.open('POST', 'http://127.0.0.1:7890/save', true)
+  request.setRequestHeader('Content-Type', 'application/json')
+
+  request.send(JSON.stringify(checklist))
+}
+
+function loadChecklist () {
+
 }
