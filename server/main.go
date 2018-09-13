@@ -4,16 +4,49 @@ import (
 	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"os"
 )
 
+var SaveFileLocation = "checklist.json"
+
+// *******************
+// * Data Structures *
+// *******************
 type Checkboxes struct {
 	Boxes []bool `json:"checkboxes"`
+}
+
+type Checklist struct {
+	Items []ChecklistItem `json:"items"`
+}
+
+type ChecklistItem struct {
+	Finished bool   `json:"finished"`
+	Label    string `json:"label"`
 }
 
 type FinishedResponse struct {
 	Finished bool
 }
 
+// ****************
+// * Server Setup *
+// ****************
+func main() {
+	r := gin.Default()
+	r.Use(cors.Default())
+	r.POST("/finished", HandleFinished)
+	r.POST("/save", HandleSave)
+
+	fmt.Println("***Server Started!***")
+
+	r.Run("127.0.0.1:7890")
+}
+
+// ************
+// * Handlers *
+// ************
 func HandleFinished(c *gin.Context) {
 	var boxes Checkboxes
 
@@ -34,12 +67,28 @@ func HandleFinished(c *gin.Context) {
 	c.JSON(200, response)
 }
 
-func main() {
-	r := gin.Default()
-	r.Use(cors.Default())
-	r.POST("/finished", HandleFinished)
+func HandleSave(c *gin.Context) {
+	body, err := ioutil.ReadAll(c.Request.Body)
 
-	fmt.Println("***Server Started!***")
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	r.Run("127.0.0.1:7890")
+	saveToFile(string(body))
+}
+
+// *********************
+// * Utility Functions *
+// *********************
+func saveToFile(checklistState string) {
+	f, err := os.Create(SaveFileLocation)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer f.Close()
+
+	_, err = f.WriteString(checklistState)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
